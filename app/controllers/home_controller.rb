@@ -21,15 +21,18 @@ class HomeController < ApplicationController
     @forecast_link = response["current_observation"]["forecast_url"]
     @feels_like = response["current_observation"]["feelslike_f"]
 
-    search_query = "weather #{@weather_words}"
+    search_query = "#{@weather_words}"
 
     response = HTTParty.get("http://pixabay.com/api", :query => {
-      :key => ENV['pixabay_apikey'],
+      :key => ENV['pixabay_api_key'],
       :q => search_query
     })
-
+    
+  
     randnum = rand response["hits"].length
-    @url = response["hits"][randum]["webformatURL"]
+    
+    
+    @url = response["hits"][randnum]["webformatURL"]
 
   end
 
